@@ -1,0 +1,14 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/KohaLibrisServices.t
+t/C4/Context.pm
+lib/KohaLibrisServices.pm
+lib/IdMapping.pm
+lib/IsbnRegexp.pm
+lib/LoanStatus.pm
+lib/RedirectBibitem.pm
+lib/RedirectReserve.pm
+lib/Plack/Middleware/SetEnvFromQueryString.pm
+lib/KohaLibrisServices.pm

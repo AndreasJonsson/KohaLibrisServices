@@ -1,0 +1,6 @@
+Revision history for Perl extension KohaLibrisServices.
+
+0.01  Wed Nov 30 10:56:34 2016
+	- original version; created by h2xs 1.23 with options
+		-AXc -n KohaLibrisServices
+
