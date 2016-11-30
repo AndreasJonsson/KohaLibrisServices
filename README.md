@@ -1,6 +1,14 @@
 
-Loan status for Libris integration of Koha
+Loan status and other services for Libris integration of Koha
 ==========================================
+
+This module contains three plack applications for Libris integration.
+
+* loan_status_app
+* redirect_bibitem_app
+* redirect_reserve_app
+
+These applications need to be adapted depending on the bibliographic framework.
 
 Installation
 ------------
@@ -9,6 +17,22 @@ Installation
    make
    make test
    make install
+
+Database table
+--------------
+
+Before using the table used in IdMap.pm needs to be created.
+
+   CREATE TABLE `kreablo_idmapping` (
+       `idmap` int NOT NULL AUTO_INCREMENT,
+       `biblioitemnumber` int(11) NOT NULL,
+       `kidm_bibid` mediumtext COLLATE utf8_unicode_ci,
+       `kidm_99` mediumtext COLLATE utf8_unicode_ci,
+       PRIMARY KEY (`idmap`),
+       KEY `kidm_bibid` (`kidm_bibid`(255)),
+       KEY `kidm_99` (`kidm_99`(255)),
+      FOREIGN KEY (`biblioitemnumber`) REFERENCES `biblioitems` (`biblioitemnumber`) ON DELETE CASCADE ON UPDATE CASCADE
+    );
 
 
 Usage
