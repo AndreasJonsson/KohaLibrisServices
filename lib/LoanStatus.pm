@@ -31,7 +31,6 @@ sub loan_status_app {
 
 	eval {
            $row = $idmapping->get_biblioitem( 'libris_bibid' => $env->{'libris_bibid'},
-                                              'libris_99'      => $env->{'libris_99'},
                                               'isbn'           => $env->{'isbn'},
                                               'issn'           => $env->{'issn'} );
         };

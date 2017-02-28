@@ -20,7 +20,6 @@ sub redirect_reserve_app {
 	my $row;
 	my $ret = eval {
         $row = $idmapping->get_biblioitem( 'libris_bibid'   => $env->{'libris_bibid'},
-                                           'libris_99'      => $env->{'libris_99'},
                                            'isbn'           => $env->{'isbn'},
                                            'issn'           => $env->{'issn'} );
         };
@@ -52,7 +51,7 @@ sub redirect_reserve_app {
 
 =head1 NAME
 
-RedirectReserve - Redirect to reservation view given Libris id number, Libris 99 id  number or ISBN.
+RedirectReserve - Redirect to reservation view given Libris id number or ISBN.
 
 =head1 SYNOPSIS
 

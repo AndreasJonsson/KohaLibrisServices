@@ -20,9 +20,8 @@ sub redirect_bibitem_app {
 	my $row;
 	my $ret = eval {
          $row = $idmapping->get_biblioitem( 'libris_bibid'   => $env->{'libris_bibid'},
-											'libris_99'      => $env->{'libris_99'},
-											'isbn'           => $env->{'isbn'},
-											'issn'           => $env->{'issn'} );
+					    'isbn'           => $env->{'isbn'},
+                                            'issn'           => $env->{'issn'} );
 	};
 
 	my $loc;
@@ -52,7 +51,7 @@ sub redirect_bibitem_app {
 
 =head1 NAME
 
-RedirectBibitem - Redirect to bibliographic item given Libris id number, Libris 99 id  number or ISBN.
+RedirectBibitem - Redirect to bibliographic item given Libris id number or ISBN.
 
 =head1 SYNOPSIS
 
