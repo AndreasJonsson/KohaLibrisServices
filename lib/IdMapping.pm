@@ -122,9 +122,10 @@ sub do_query_slow {
     $add->("(ExtractValue(marcxml, '//controlfield[\@tag=\"003\"]') REGEXP '((libr)|(arkm))') AND ExtractValue(marcxml, '//controlfield[\@tag=\"001\"]') = ?", 'libris_99', ' OR ');
 
     my $q = <<"EOF";
-SELECT biblionumber, biblioitems.biblioitemnumber, isbn, issn, ExtractValue(marcxml, '//controlfield[\@tag=\"001\"]') as controlnumber, ExtractValue(marcxml, '//controlfield[\@tag=\"003\"]') as idtype
+SELECT biblio.biblionumber, biblioitems.biblioitemnumber, isbn, issn, ExtractValue(metadata, '//controlfield[\@tag=\"001\"]') as controlnumber, ExtractValue(metadata, '//controlfield[\@tag=\"003\"]') as idtype
 FROM
-  biblioitems JOIN biblio USING (biblionumber)
+  biblioitems JOIN biblio USING (biblio.biblionumber = biblioitems.biblionumber)
+              JOIN biblio_metadata ON (biblio.biblionumber = biblio_metadata.biblionumber AND biblio_metadata.format = 'marcxml')
 WHERE
   $where;
 EOF
