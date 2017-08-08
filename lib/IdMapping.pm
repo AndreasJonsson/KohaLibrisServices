@@ -118,13 +118,13 @@ sub do_query_slow {
 
     $add->("isbn REGEXP ?", 'isbn', ' OR ISNULL(isbn) AND ');
     $add->('issn = ?', 'issn', ' OR ISNULL(issn) AND ');
-    $add->("(ExtractValue(marcxml, '//controlfield[\@tag=\"003\"]') REGEXP '((libr)|(arkm))') AND ExtractValue(marcxml, '//controlfield[\@tag=\"001\"]') = ?", 'libris_bibid', ' OR ');
-    $add->("(ExtractValue(marcxml, '//controlfield[\@tag=\"003\"]') REGEXP '((libr)|(arkm))') AND ExtractValue(marcxml, '//controlfield[\@tag=\"001\"]') = ?", 'libris_99', ' OR ');
+    $add->("(ExtractValue(metadata, '//controlfield[\@tag=\"003\"]') REGEXP '((libr)|(arkm))') AND ExtractValue(metadata, '//controlfield[\@tag=\"001\"]') = ?", 'libris_bibid', ' OR ');
+    $add->("(ExtractValue(metadata, '//controlfield[\@tag=\"003\"]') REGEXP '((libr)|(arkm))') AND ExtractValue(metadata, '//controlfield[\@tag=\"001\"]') = ?", 'libris_99', ' OR ');
 
     my $q = <<"EOF";
 SELECT biblio.biblionumber, biblioitems.biblioitemnumber, isbn, issn, ExtractValue(metadata, '//controlfield[\@tag=\"001\"]') as controlnumber, ExtractValue(metadata, '//controlfield[\@tag=\"003\"]') as idtype
 FROM
-  biblioitems JOIN biblio USING (biblio.biblionumber = biblioitems.biblionumber)
+  biblioitems JOIN biblio ON (biblio.biblionumber = biblioitems.biblionumber)
               JOIN biblio_metadata ON (biblio.biblionumber = biblio_metadata.biblionumber AND biblio_metadata.format = 'marcxml')
 WHERE
   $where;
